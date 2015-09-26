@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<script type="text/javascript" src="./js/CargarConstancia.js"></script>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -21,7 +20,7 @@
 		<!-- end #header -->
 		<div id="menu">
 			<ul>
-				<li class="current_page_item"><a href="#">Home</a></li>
+				<li class="current_page_item"><a href="Bienvenido.jsp">Principal</a></li>
 				<li><a href="DatosPersonales.jsp">Datos Personales</a></li>
 				<li><a href="ExperienciaFormacion.jsp">Experiencia y
 						Formación</a></li>
@@ -50,9 +49,9 @@
 								<span class="date"> </span><span class="posted"> <a
 									href="#"></a></span>
 							</p>
-							  <div style="clear: both;">&nbsp;</div>
+							<div style="clear: both;">&nbsp;</div>
 							<div class="entry">
-								<form name="formularioCursos" enctype="multipart/form-data" action="" method="post" class="basic-grey">
+								<form action="" method="post" class="basic-grey">
 								
 								<label> <span>Nombre :</span></label>
 									<tr class="color">
@@ -78,15 +77,21 @@
 									<tr>
 										<label> <span>Cargar Constancia:</span></label>
 										<tr class="color">
-										<input type=file name=constancia onchange="CargarConstancia(this)">
+										<input type=file name=image onchange="updateFilename(this.value)">
+										 <script>
+                    function updateFilename(path) {
+                     var name = extractFilename(path);
+                    document.getElementById('filename').textContent = name;
+                        }
+                    </script>
 									</tr>
-										<label>
-     							   <span>&nbsp;</span> 
-     							  <input name="guardar" type="button" class="button" value="Guardar" /> 
-  									  </label>
-    								<input type="hidden" name="hid" value="" />
+									</tr>
+		<label>
+        <span>&nbsp;</span> 
+        <input type="button" class="button" value="Guardar" /> 
+    </label>
+    
 									</form>
-									<iframe name="iframe" style="display: none;"></iframe>
 									
 								<br></br>
 

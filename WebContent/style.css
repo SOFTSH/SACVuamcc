@@ -69,7 +69,7 @@ a:hover {
 	float: left;
 	height: 102px;
 	margin: 0;
-	background: url(./images/LogotipoUATx.png) no-repeat left top;
+	background: url(images/img04.jpg) no-repeat left top;
 	padding-top: 30px;
 	color: #000000;
 }
@@ -159,6 +159,8 @@ a:hover {
 	background: #E9E3CB;
 	border-bottom: 4px solid #FFFFFF;
 }
+
+
 /* Menu */
 
 	#menu {
@@ -169,7 +171,7 @@ a:hover {
 }
 
 #menu ul {
-	margin: 0px 0px 0px -200px;
+	margin: 5px 0px 0px -180px;
 	padding: 0;
 	list-style: none;
 	line-height: normal;
@@ -207,7 +209,7 @@ a:hover {
 /* Page */
 
 #page {
-	width: 960px;
+	width: 650px;
 	margin: 0 auto;
 	padding: 0;
 }
@@ -408,7 +410,7 @@ a:hover {
 .CSSTableGenerator {
 	margin:0px;padding:0px;
 	width:100%;
-	box-shadow: 10px 10px 5px #888888;
+	
 	border:1px solid #ffffff;
 	
 	-moz-border-radius-bottomleft:0px;
@@ -547,7 +549,7 @@ a:hover {
 }
 .basic-grey label {
     display: block;
-    margin: 5px;
+    margin: 0px;
 }
 .basic-grey label>span {
     float: left;
@@ -600,7 +602,6 @@ a:hover {
     border-radius: 3px;
     text-shadow: 1px 1px 1px #9E3F3F;
     cursor: pointer;
-    
 }
 .basic-grey .button:hover {
     background: #CF7A7A

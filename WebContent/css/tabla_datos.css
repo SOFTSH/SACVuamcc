@@ -1,0 +1,52 @@
+.data table {
+	border-collapse: collapse;
+	text-align: left;
+	width: 100%;
+}
+
+.data {
+	font: normal 12px/150% Arial, Helvetica, sans-serif;
+	background: #fff;
+	overflow: hidden;
+	border: 1px solid #C9C9C9;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.data table td, .data table th {
+	padding: 3px 10px;
+}
+
+.data table thead th {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #F7CDCD
+		), color-stop(1, #F7CDCD));
+	background: -moz-linear-gradient(center top, #F7CDCD 5%, #F7CDCD 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F7CDCD',
+		endColorstr='#F7CDCD');
+	background-color: #F7CDCD;
+	color: #AB1515;
+	font-size: 15px;
+	font-weight: bold;
+	border-left: 1px solid #C9C9C9;
+}
+
+.data table thead th:first-child {
+	border: none;
+}
+
+.data table tbody td {
+	color: #B33035;
+	border-left: 1px solid #C9C9C9;
+	font-size: 15px;
+	border-bottom: 1px solid #C9C9C9;
+	font-weight: normal;
+}
+
+.data table tbody td:first-child {
+	border-left: none;
+}
+
+.data table tbody tr:last-child td {
+	border-bottom: none;
+}

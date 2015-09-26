@@ -6,26 +6,21 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Asociar Licenciatura</title>
+<title>Experiencia Laboral</title>
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 	<div id="wrapper">
 		<div id="header">
 			<div id="logo">
-				<h1>
-					<a href="">Sistema de Administraci&oacute;n de CV´s </a>
-				</h1>
-				<p>
-					<a href="http://templated.co" rel="nofollow">UAMCC</a>
-				</p>
-
+				<h1><a href="">Sistema de Administración de CV´s </a></h1>
+			<p><a href="http://templated.co" rel="nofollow">UAMCC</a></p>
 			</div>
 		</div>
 		<!-- end #header -->
 		<div id="menu">
 			<ul>
-				<li class="current_page_item"><a href="Bienvenido.jsp">Principal</a></li>
+				<li class="current_page_item"><a href="Bienvenido.jsp">Pricinpal</a></li>
 				<li><a href="DatosPersonales.jsp">Datos Personales</a></li>
 				<li><a href="ExperienciaFormacion.jsp">Experiencia y
 						Formación</a></li>
@@ -34,7 +29,7 @@
 				<li><a href="Publicaciones.jsp">Publicaciones</a></li>
 				<li><a href="MiembroOrganizacion.jsp">Miembro de
 						Organización</a></li>
-				<li><a href=AsesoriaTesis.jsp>Asesoría de Tesis</a></li>
+			    <li><a href=AsesoriaTesis.jsp>Asesoría de Tesis</a></li>
 				<li><a href=Sinodal.jsp>Sinodal</a></li>
 			</ul>
 		</div>
@@ -42,99 +37,106 @@
 		<div id="page">
 			<div id="page-bgtop">
 				<div id="page-bgbtm">
-				
 					<div id="content">
 						<div class="post">
-						<li>
-    <div id="Datos" >
-        <form method="get" action="#">
-                   <div class="CSSTableGenerator">
-                <table >
-                    <tr><td>Nombre:</td>
-                        
-                        <td>Dato1</td>
-                        <td>Licenciaturas Asociadas</td>
-                    
-                        
-                    </tr>
-                    <tr><td>Apellido Paterno:</td>
-                    	
-                        <td>Dato2</td>
-                       
-                        <td>Ingeniería en computación</td>
-                    </tr>
-                    <tr><td>Apellido Materno:</td>
-                    	
-                        <td>Dato3</td>
-                       
-                        <td>Contabilidad Pública</td>
-                    </tr>
-                    <tr><td>Numero de Empleado:</td>
-                    	
-                        <td>Dato4</td>
-                        <td>      </td>
-                    </tr>
-                    
-                </table>
-                        <br>
-                           
-                    </div>
-        </form>
-    </div>
-    <div style="clear: both;">&nbsp;</div>
-
-            </li>
 							<h2 class="title">
-								<a href="#">ASOCIAR LICENCIATURA</a>
+								<a href="#">EXPERIENCIA LABORAL</a>
 							</h2>
 							<p class="meta">
-								<span class="date"> </span><span class="posted"> <a
-									href="#"></a></span>
+								<span class="date"> 
+								</span><span class="posted"> <a href="#"></a></span>
 							</p>
 							<div style="clear: both;">&nbsp;</div>
 							<div class="entry">
 								<form action="" method="post" class="basic-grey">
 
-									</h1>
-									<label >
-<span>Licenciatura :</span>
- <tr class="color">
-  </label></td>
-            <td><select name="consepto">
-            <option  Value="0">Seleccione una Opción</option>
-            <option name=lib value="Colegiatura"> Ingenieria en Computación </option>
-  <option name=lib value="Libro"> Psicologia </option>
-  <option name=lib value="Extra"> Derecho </option>
-<option name=lib value="Extra"> Administración </option>
-<option name=lib value="Extra"> Contaduria </option>
-<option name=lib value="Extra"> Ciencias Politicas </option>
-<tr>
-            </select>
+								
+									<label> <span>Periodo :</span>
+									</label>
+									<tr class="color">
 
-     <label>
-        <span>&nbsp;</span> 
-        <input type="button" class="button" value="Guardar" /> 
-    </label>    
-</form>
+
+										<input type="text" name="proyecto" placeholder="Periodo">
+									</tr>
+
+
+										<label> <span>Instituci&oacute;n o Empresa :</span>
+											<tr class="color">
+												<input id="name" type="text" name="name" placeholder="Institución o empresa" />
+											<tr></label>
+
+										<label> <span>Departamento o Facultad :</span>
+
+											<tr class="color">
+												<input id="email" type="text" name="email"
+													placeholder="Departamento o Facultad" />
+											<tr></label>
+											
+											
+											<label> <span>Lugar :</span>
+									</label>
+									<tr class="color">
+
+
+										<input type="text" name="proyecto" placeholder="Lugar">
+									</tr>
+
+										<label> <span>Puesto :</span>
+									</label>
+									<tr class="color">
+
+
+										<input type="text" name="proyecto" placeholder="Puesto">
+									</tr>
+								</form>
+								
+								<br></br> <input type="submit" value="Guardar" class="btn">
+									<input type="button" value="Cancelar" class="btn"
+									onclick=" location.href='RegistroCurricular.jsp'">
+								<br></br>
+								
+							     <div class="CSSTableGenerator">
+									<table>
+										<tr>
+													<td>Periodo</td>
+													<td>Instituci&oacuten o Empresa</td>
+													<td>Departeamento o Facultad</td>
+													<td>Lugar</td>
+													<td>Puesto</td>
+													<td>Editar</td>
+													<td>Eliminar</td>
+													</tr>
+										<tr>
+													<th>datos</th>
+													<th>datos</th>
+													<th>datos</th>
+													<th>datos</th>
+													<th>datos</th>
+													<u><th>Editar</th></u>
+													<u><th>Eliminar</th></u>
+													</tr>
+													<tr>
+													<th>datos</th>
+													<th>datos</th>
+													<th>datos</th>
+													<th>datos</th>
+													<th>datos</th>
+													<u><th>Editar</th></u>
+													<u><th>Eliminar</th></u>
+													</tr>
+
+									</table>
+									</div>
+				
 							</div>
 						</div>
-
+						
 						<div style="clear: both;">&nbsp;</div>
 					</div>
 					<!-- end #content -->
 					<div id="sidebar">
 						<ul>
-							<li>
-								<div id="search">
-									<form method="get" action="#">
-										<div>
-											<input type="text" name="s" id="search-text" value="" /> <input
-												type="submit" id="search-submit" value="GO" />
-										</div>
-									</form>
-								</div>
-								<div style="clear: both;">&nbsp;</div>
-							</li>
+						
 							<li>
 								<h2>Aliquam tempus</h2>
 								<p>Mauris vitae nisl nec metus placerat perdiet est.
