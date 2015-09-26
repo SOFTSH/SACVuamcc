@@ -11,6 +11,9 @@
 
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 
+
+
+
   <script language="JavaScript">
   
    function oculta(id){
