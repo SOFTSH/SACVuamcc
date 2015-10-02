@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+	import="java.util.*,mx.uatx.curriculums.dto.CursosDTO,mx.uatx.curriculums.dao.CursosDAO"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,8 +15,12 @@
 	<div id="wrapper">
 		<div id="header">
 			<div id="logo">
-				<h1><a href="">Sistema de Administración de CV´s </a></h1>
-			<p><a href="http://templated.co" rel="nofollow">UAMCC</a></p>
+				<h1>
+					<a href="">Sistema de Administración de CV´s </a>
+				</h1>
+				<p>
+					<a href="http://templated.co" rel="nofollow">UAMCC</a>
+				</p>
 			</div>
 		</div>
 		<!-- end #header -->
@@ -29,9 +35,12 @@
 				<li><a href="Publicaciones.jsp">Publicaciones</a></li>
 				<li><a href="MiembroOrganizacion.jsp">Miembro de
 						Organización</a></li>
-			    <li><a href=AsesoriaTesis.jsp>Asesoría de Tesis</a></li>
+				<li><a href=AsesoriaTesis.jsp>Asesoría de Tesis</a></li>
 				<li><a href=Sinodal.jsp>Sinodal</a></li>
-				<li><a href=Cursos.jsp>Cursos</a></li>		
+				<li><a href=Cursos.jsp>Cursos</a></li>
+
+
+
 
 
 			</ul>
@@ -51,138 +60,237 @@
 							</p>
 							<div style="clear: both;">&nbsp;</div>
 							<div class="entry">
-								<form action="" method="post" class="basic-grey">
-								
-								<label> <span>Nombre :</span></label>
-									<tr class="color">
-										<input type="text" name="Nombre" placeholder="Nombre">
-									</tr>
-								<label> <span>Periodo :</span></label>
-									<tr class="color">
-										<input type="text" name="Periodo" placeholder="Periodo">
-									</tr>
-								<label> <span>Instituci&oacute;n :</span></label>
-									<tr class="color">
-										<input type="text" name="Institución" placeholder="Institución">
-									</tr>
-								<label> <span>Lugar :</span></label>
-									<tr class="color">
-										<input type="text" name="Lugar" placeholder="Lugar">
-									</tr>
-								<label> <span>Horas :</span></label>
-									<tr class="color">
-										<input type="text" name="Horas" placeholder="Horas">
-									</tr>
-								
-									<tr>
-										<label> <span>Cargar Constancia:</span></label>
-										<tr class="color">
-										<input type=file name=image onchange="updateFilename(this.value)">
-										 <script>
-                    function updateFilename(path) {
-                     var name = extractFilename(path);
-                    document.getElementById('filename').textContent = name;
-                        }
-                    </script>
-									</tr>
-									</tr>
-		<label>
-        <span>&nbsp;</span> 
-        <input type="button" class="button" value="Guardar" /> 
-    </label>
-    
-									</form>
+							
+							
+							<form name="comisi" action="Cursos" method="get" class="basic-grey" >
+								<input type="hidden" name="opc" value="1" />
 									
+									
+									<h1>
+								Registro De Comisiones <span>Porfavor llene
+									todos los Campos</span>
+									
+							</h1>
+							
+								<%
+										List<CursosDTO> listLicenciaturaDTO = new ArrayList<CursosDTO>();
+																	CursosDTO cursosDTO = new CursosDTO();
+																	CursosDAO comisionesDAO = new CursosDAO();
+																	listLicenciaturaDTO = comisionesDAO.retrieveCursos(cursosDTO);
+																	request.getSession().getAttribute("listaLic");
+																	session.setAttribute("listaLic", listLicenciaturaDTO);
+																	for (int reg = 0; reg < listLicenciaturaDTO.size(); reg++) {
+																		cursosDTO = listLicenciaturaDTO.get(reg);
+																		
+																	}
+									%>
+									<label> <span>Nombre:</span>
+											<tr class="color">
+												<input id="name" type="text" name="Nombre" placeholder="Nombre" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getNombre()
+												: "");%> >
+											<tr></label>
+									<label> <span>Fecha inicio:</span>
+									</label>
+									<tr class="color">
+
+
+										<input type="text" name="FechaI" placeholder="FechaI" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getFechaI()
+												: "");%> >
+										
+																	
+									</tr>
+									
+									<label> <span>Fecha fin:</span>
+											<tr class="color">
+												<input id="name" type="text" name="FechaF" placeholder="Fecha fin" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getFechaF()
+												: "");%> >
+											<tr></label>
+ 
+                                             
+											
+										<label> <span>Institucione:</span>
+											<tr class="color">
+												<input type="text" name="Institucion" placeholder=" Instituciones" onkeypress="return  soloLetras(event)"  value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getInstitucion()
+												: "");%> >
+
+                                              <label> <span> Fecha :</span>
+											<tr class="color">
+												<input id="name" type="text" name="Fecha" placeholder="Fecha" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getConstancia()
+												: "");%> >
+											<tr></label>
+											
+
+										<label> <span>Lugar :</span>
+											<tr class="color">
+												<input id="name" type="text" name="Lugar" placeholder="Lugar"  onkeypress="return  soloLetras(event)" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getLugar()
+												: "");%> >
+											<tr></label>
+											
+											<label> <span>Horas :</span>
+											<tr class="color">
+												<input id="name" type="text" name="Horas" placeholder="Horas" onkeypress="return  soloLetras(event)" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getHoras()
+												: "");%> >
+											<tr></label>
+											
+											
+											<label> <span>Constancia :</span>
+											<tr class="color">
+												<input id="name" type="text" name="Constancia" placeholder="Constancia" value=<%out.println(request.getSession().getAttribute("updateCursosDTO") != null ? ((CursosDTO) request
+												.getSession().getAttribute("updateCursosDTO")).getConstancia()
+												: "");%> >
+											<tr></label>
+									
+
+								<!-- <tr>
+										<label> <span>Cargar Constancia:</span></label>
+									<tr class="color">
+										<input type=file name=image
+											onchange="updateFilename(this.value)">
+										<script>
+											function updateFilename(path) {
+												var name = extractFilename(path);
+												document
+														.getElementById('filename').textContent = name;
+											} 
+										</script> -->
+									</tr>
+									</tr>
+									<input type="submit" value="Guardar" class="btn">
+		<!-- <input type="button" value="Cancelar" class="btn" onclick=" location.href='RegistroCurricular.jsp'"> -->
+								</form>
+							
+								<br></br>
 								<br></br>
 
-								<div class="CSSTableGenerator">
-									<table>
-										<tr>
-
-											<td>Nombre</td>
-											<td>Instituci&oacute;n</td>
-											<td>Constancia</td>
-											<td>Actualizar</td>
-											<td>Eliminar</td>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-
-									</table>
-								</div>
-
-							</div>
+							</div>	
 						</div>
 
 						<div style="clear: both;">&nbsp;</div>
+						
+						
 					</div>
 					<!-- end #content -->
-					<div id="sidebar">
-						<ul>
-							<li>
-								<div id="search">
-									<form method="get" action="#">
-										<div>
-											<input type="text" name="s" id="search-text" value="" /> <input
-												type="submit" id="search-submit" value="GO" />
-										</div>
-									</form>
+					<div class="CSSTableGenerator">
+									
+						
+					<%
+						//out.println("datos");
+							//List<RegistroUsuarioDTO> listUsuarioDTO = new ArrayList<RegistroUsuarioDTO>();
+						List<CursosDTO> listEmpleadoDTO = new ArrayList<CursosDTO>();
+						CursosDTO empleadoRDTO = new CursosDTO();
+						CursosDAO empleadoRDAO = new CursosDAO();
+						listEmpleadoDTO = empleadoRDAO.retrieveCursos(empleadoRDTO);
+							if (request.getSession().getAttribute("listaCurso") != null) {
+						listEmpleadoDTO = (List<CursosDTO>) request
+								.getSession().getAttribute("listaCurso");
+							} else {
+							}
+							out.println("<center>");
+							out.println("<div class=data >");
+						///	out.println("<table >");
+							out.println("<table  id='Pmoral' ><thead><tr> <td>IdCurso</td> <td>Nombre</td> <td>Fecha Inicio</td>  <td>Fecha Fin</td> <td>Institucion</td> <td>Lugar</td> <td>Horas</td> <td>Constancia</td><td>IdEstatus</td> <td>IdAsignar</td> <td>IdUsuarioCambio</td> <td>Fecha</td> <td>Estatus</td>    <td>Actualizar</td><td>Eliminar</td></thead><tbody>");
+							 
+							
+							for (int reg = 0; reg < listEmpleadoDTO.size(); reg++) {
+						empleadoRDTO = listEmpleadoDTO.get(reg);
+
+						out.println("<tr>");
+
+						//out.println("<td>");
+						//out.println("<center>"+usuarioDTO.getId()+"</center>");
+						//out.println("</td>");
+					//	empleadoRDTO.getIdComision();
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getIdCurso() + "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getNombre() + "</center>");
+						out.println("</th>");
+						
+			
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFechaI() + "</center>");
+						out.println("</th>");
+						
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFechaF() + "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getInstitucion()
+								+ "</center>");
+						out.println("</th>");
+
+						
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getLugar()+ "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getHoras()
+								+ "</center>");
+						out.println("</th>");
+
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getConstancia()
+								+ "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getIdEstatus()
+								+ "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getIdAsignar()
+								+ "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFecha()+ "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getEstatus()+ "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getIdUsuarioCambio() + "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center><a href=Cursos?opc=2&id="
+								+ empleadoRDTO.getIdCurso()
+								+ "  class=btn btn-skin pull-right role=button id=ac  onClick=muestra('Pfisica').innerHTML>Actualizar<a/> </center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center><a href=Cursos?opc=3&id="
+								+  empleadoRDTO.getIdCurso()
+								+ " class=btn btn-skin pull-right role=button  >Eliminar<a/>");
+						out.println("</th></center>");
+
+						out.println("</tr>");
+							}
+							out.println("</tbody></table> </div>");
+							out.println("</center>");
+					%>
+
+
+									
 								</div>
-								<div style="clear: both;">&nbsp;</div>
-							</li>
-							<li>
-								<h2>Aliquam tempus</h2>
-								<p>Mauris vitae nisl nec metus placerat perdiet est.
-									Phasellus dapibus semper consectetuer hendrerit.</p>
-							</li>
-							<li>
-								<h2>Categories</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Blogroll</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Archives</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!-- end #sidebar -->
 					<div style="clear: both;">&nbsp;</div>
 				</div>
 			</div>
