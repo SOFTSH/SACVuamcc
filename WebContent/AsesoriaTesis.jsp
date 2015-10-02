@@ -1,181 +1,243 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+	import="java.util.*,mx.uatx.curriculums.dto.AsesoriaTesisDTO,mx.uatx.curriculums.dao.AsesoriaTesisDAO"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Asesoria de Tesis</title>
+<title>Asesoria Tesis</title>
+
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<!-- Libreria jQuery -->
+
+<script type="text/javascript" src="js/validarCampos.js"></script>
+<script type="text/javascript">
+	function validarD() {
+		if (document.registrocs.nombre.value == "") {
+			location.href = 'Vaciosrd.jsp';
+			return false;
+		}
+		if (document.registrocs.ap.value == "") {
+			location.href = 'Vaciosrd.jsp';
+			return false;
+		}
+		if (document.registrocs.am.value == "") {
+			location.href = 'Vaciosrd.jsp';
+			return false;
+		}
+		if (document.registrocs.noe.value == "") {
+			location.href = 'Vaciosrd.jsp';
+			return false;
+		}
+		if (document.registrocs.correo.value == "") {
+			location.href = 'Vaciosrd.jsp';
+			return false;
+		}
+
+		document.registrocs.submit();
+	}
+</script>
 </head>
+
+
 <body>
 	<div id="wrapper">
 		<div id="header">
 			<div id="logo">
 				<h1>
-					<a href="">Sistema de Administraci&oacute;n de CV´s </a>
+					<a href="">Sistema de Aministración de CV´s </a>
 				</h1>
 				<p>
 					<a href="http://templated.co" rel="nofollow">UAMCC</a>
 				</p>
-
 			</div>
 		</div>
 		<!-- end #header -->
 		<div id="menu">
-			<ul>
-						<li class="current_page_item"><a href="Bienvenido.jsp">Pricinpal</a></li>
-				<li><a href="DatosPersonales.jsp">Datos Personales</a></li>
-				<li><a href="ExperienciaFormacion.jsp">Experiencia y
-						Formación</a></li>
-				<li><a href="ExperienciaLaboral.jsp">Experiencia Laboral</a></li>
-				<li><a href="Comisiones.jsp">Comisiones</a></li>
-				<li><a href="Publicaciones.jsp">Publicaciones</a></li>
-				<li><a href="MiembroOrganizacion.jsp">Miembro de
-						Organización</a></li>
-				<li><a href=AsesoriaTesis.jsp>Asesoría de Tesis</a></li>
-				<li><a href=Sinodal.jsp>Sinodal</a></li>
-			</ul>
+
+			<div id="menu">
+				<ul>
+
+					<li><a href="Bienvenido.jsp">Principal</a></li>
+
+
+					<li><a href="#">Salir</a></li>
+				</ul>
+
+			</div>
 		</div>
 		<!-- end #menu -->
 		<div id="page">
 			<div id="page-bgtop">
 				<div id="page-bgbtm">
 					<div id="content">
-						<div class="post">
-							<h2 class="title">
-								<a href="#">ASESOR&Iacute;A DE TESIS</a>
-							</h2>
-							<p class="meta">
-								<span class="date"> </span><span class="posted"> <a
-									href="#"></a></span>
-							</p>
-							<div style="clear: both;">&nbsp;</div>
-							<div class="entry">
-								<form action="" method="post" class="basic-grey">
 
-									</h1>
-									<label> <span>Proyecto :</span>
-									</label>
+						<div class="target">
+
+							<form name="registrocs" action="AsesoriaTesis" method="get"
+								class="basic-grey">
+								<input type="hidden" name="opc" value="1" />
+								<h1>
+									Asesoria Tesis <span>Porfavor llene todos los Campos</span>
+								</h1>
+
+								<%
+									List<AsesoriaTesisDTO> listLicenciaturaDTO = new ArrayList<AsesoriaTesisDTO>();
+								AsesoriaTesisDTO empleadoDTO = new AsesoriaTesisDTO();
+								AsesoriaTesisDAO empleadoDAO = new AsesoriaTesisDAO();
+									listLicenciaturaDTO = empleadoDAO.retrieveAsesoria(empleadoDTO);
+									request.getSession().getAttribute("listaLic");
+									session.setAttribute("listaLic", listLicenciaturaDTO);
+									for (int reg = 0; reg < listLicenciaturaDTO.size(); reg++) {
+										empleadoDTO = listLicenciaturaDTO.get(reg);
+
+									}
+								%>
+
+
+								 <label> <span>Proyecto :</span>
+									<tr class="color">
+										<input onkeypress="return soloLetras(event)" id="name"
+											type="text" name="Proyecto" placeholder="Proyecto"
+											value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null
+					? ((AsesoriaTesisDTO) request.getSession().getAttribute("updateEmpleadoDTO")).getProyecto()
+					: "");%>>
+									</tr></label>
+									
+									
+								 <label> <span>Nivel :</span>
+
 									<tr class="color">
 
+										<input onkeypress="return soloLetras(event)" id="nivel"
+											type="text" name="Nivel" placeholder="Nivel"
+											value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null
+					? ((AsesoriaTesisDTO) request.getSession().getAttribute("updateEmpleadoDTO")).getNivel() : "");%>>
+									</tr></label> 
+									
+							
+							<label> <span>Fecha Titulacion:</span>
+									<tr class="color">
+										<input onkeypress="return soloNumeros(event)" id="name"
+											type="text" name="FechaTitulacion"
+											placeholder="Fecha Titulacion"
+											value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null
+					? ((AsesoriaTesisDTO) request.getSession().getAttribute("updateEmpleadoDTO"))
+							.getFechaTitulacion()
+					: "");%>>
+									</tr></label> 
+									
+									
+					<label> <span>Alumno:</span>
+									<tr class="color">
+										<input onkeypress="return soloLetras(event)"
+											id="name" type="text" name="Alumno"
+											placeholder="Nombre del Alumno"
+											value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null
+					? ((AsesoriaTesisDTO) request.getSession().getAttribute("updateEmpleadoDTO")).getAlumno() : "");%>>
+									</tr></label> 
+									
+									
+						 <label> <span>Constancia :</span>
+									<tr class="color">
+										<input onkeypress="return soloNumeros(event)" id="nivel"
+											type="text" name="Constancia" placeholder="Constancia"
+											value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null
+							? ((AsesoriaTesisDTO) request.getSession().getAttribute("updateEmpleadoDTO")).getConstancia() : "");%>>
+		
+		
+									
+ 
+ 						 <input type="submit" value="Guardar" class="btn">
+ 						 </form>
+				</div>
+	</div>
+			<br></br>	
+				<br></br>	
+				<br></br>	
+					<div class="CSSTableGenerator">
+					
+					
+					<%
+																//out.println("datos");
+																//List<RegistroUsuarioDTO> listUsuarioDTO = new ArrayList<RegistroUsuarioDTO>();
+																List<AsesoriaTesisDTO> listEmpleadoDTO = new ArrayList<AsesoriaTesisDTO>();
+																AsesoriaTesisDTO empleadoRDTO = new AsesoriaTesisDTO();
+																AsesoriaTesisDAO empleadoRDAO = new AsesoriaTesisDAO();
+																listEmpleadoDTO = empleadoRDAO.retrieveAsesoria(empleadoDTO);
+																if (request.getSession().getAttribute("listaUsuario") != null) {
+																	listEmpleadoDTO = (List<AsesoriaTesisDTO>) request.getSession().getAttribute("listaEmpleado");
+																} else {
+																}
+																out.println("<center>");
+																out.println("<div class=data >");
+																///	out.println("<table >");
+																out.println(
+																		"<table  id='Pmoral' ><thead><tr><td>Proyecto</td><td>Nivel</td><td>Fecha De Titulacion</td><td>Alumno (s)</td><td>Constancia</td><td>Actualizar</td><td>Eliminar</td></thead><tbody>");
+																for (int reg = 0; reg < listEmpleadoDTO.size(); reg++) {
+																	empleadoRDTO = listEmpleadoDTO.get(reg);
 
-										<input type="text" name="proyecto" placeholder="Proyecto">
-									</tr>
+																	out.println("<tr>");
 
+																	//out.println("<td>");
+																	//out.println("<center>"+usuarioDTO.getId()+"</center>");
+																	//out.println("</td>");
 
-										<label> <span>Nivel :</span>
-											<tr class="color">
-												<input id="name" type="text" name="name" placeholder="Nivel" />
-											<tr></label>
+																	out.println("<th>");
+																	out.println("<center>" + empleadoRDTO.getProyecto() + "</center>");
+																	out.println("</th>");
 
-										<label> <span>Fecha :</span>
+																	out.println("<th>");
+																	out.println("<center>" + empleadoRDTO.getNivel() + "</center>");
+																	out.println("</th>");
 
-											<tr class="color">
-												<input id="email" type="text" name="email"
-													placeholder="Fecha" />
-											<tr></label>
+																	out.println("<th>");
+																	out.println("<center>" + empleadoRDTO.getFechaTitulacion() + "</center>");
+																	out.println("</th>");
 
-										<label> <span>Alumno (os) :</span>
-											<tr class="color">
-												<input id="name" type="text" name="name"
-													placeholder="Alumno" />
-											<tr></label>
-								</form>
+																	out.println("<th>");
+																	out.println("<center>" + empleadoRDTO.getAlumno() + "</center>");
+																	out.println("</th>");
 
-								<br></br> <input type="submit" value="Guardar" class="btn">
-									<input type="button" value="Cancelar" class="btn"
-									onclick=" location.href='RegistroCurricular.jsp'">
-								<br></br>
+																	out.println("<th>");
+																	out.println("<center>" + empleadoRDTO.getConstancia() + "</center>");
+																	out.println("</th>");
 
-								<div class="CSSTableGenerator">
-									<table>
-										<tr>
+																	out.println("<th>");
+																	out.println("<center><a href=AsesoriaTesis?opc=2&id=" + empleadoRDTO.getIdAsesoria()
+																			+ "  class=btn btn-skin pull-right role=button id=ac  onClick=muestra('Pfisica').innerHTML>Actualizar<a/> </center>");
+																	out.println("</th>");
+																	out.println("<th>");
+																	out.println("<center><a href=AsesoriaTesis?opc=3&id=" + empleadoRDTO.getIdAsesoria()
+																			+ " class=btn btn-skin pull-right role=button  >Eliminar<a/>");
+																	out.println("</th></center>");
 
-											<td>Proyecto</td>
-											<td>Nivel</td>
-											<td>Fecha de Titulaci&oacute;n</td>
-											<td>Alumno (os)</td>
-											<td>Actualizar</td>
-											<td>Eliminar</td>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
+																	out.println("</tr>");
 
-									</table>
-								</div>
+																}
+																out.println("</tbody></table> </div>");
+																out.println("</center>");
+															%>
+</div>
 
+			</div>
 
-							</div>
-						</div>
-
-						<div style="clear: both;">&nbsp;</div>
-					</div>
-					<!-- end #content -->
-					<div id="sidebar">
-						<ul>
-						
-							<li>
-								<h2>Aliquam tempus</h2>
-								<p>Mauris vitae nisl nec metus placerat perdiet est.
-									Phasellus dapibus semper consectetuer hendrerit.</p>
-							</li>
-							<li>
-								<h2>Categories</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Blogroll</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Archives</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!-- end #sidebar -->
 					<div style="clear: both;">&nbsp;</div>
 				</div>
+				<!-- end #content -->
+				<div id="sidebar"></div>
+				<!-- end #sidebar -->
+				<div style="clear: both;">&nbsp;</div>
 			</div>
 		</div>
-		<!-- end #page -->
+	</div>
+
+
+
+	<!-- end #page -->
 	</div>
 	<div id="footer">
 		<p>
