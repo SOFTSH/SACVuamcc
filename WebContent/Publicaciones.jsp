@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+	import="java.util.*,mx.uatx.curriculum.dto.RegistroPublicacionesDTO,mx.uatx.curriculum.dao.RegistroPublicacionesDAO"%>
+	
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,6 +12,38 @@
 <title>Publicaciones</title>
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
+
+
+
+<script type="text/javascript">
+        function soloLetras(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla == 8)
+                return true;
+            patron = /[A-Za-zñÑ\s]/;
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+        function soloNum(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla == 8)
+                return true;
+            patron = /\d/;
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+        function numYletras(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla == 8)
+                return true;
+            patron = /\w/;
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+    
+    </script>
+
+
 <body>
 	<div id="wrapper">
 		<div id="header">
@@ -47,117 +82,180 @@
 							</p>
 							<div style="clear: both;">&nbsp;</div>
 							<div class="entry">
-							<form action="" method="post" class="basic-grey">
+							<form name="comisi" action="RegistroPublicaciones" method="get" class="basic-grey" >
+								<input type="hidden" name="opc" value="1" />
+									
+									<h1>
+								Registro De Publicaciones <span>Porfavor llene
+									todos los Campos</span>
+							</h1>
+							
+									<%
+										List<RegistroPublicacionesDTO> listLicenciaturaDTO = new ArrayList<RegistroPublicacionesDTO>();
+									RegistroPublicacionesDTO publicacionesDTO = new RegistroPublicacionesDTO();
+											RegistroPublicacionesDAO publicacionesDAO = new RegistroPublicacionesDAO();
+																	listLicenciaturaDTO = publicacionesDAO.retrievePublicaciones(publicacionesDTO);
+																	request.getSession().getAttribute("listaLic");
+																	session.setAttribute("listaLic", listLicenciaturaDTO);
+																	for (int reg = 0; reg < listLicenciaturaDTO.size(); reg++) {
+																		publicacionesDTO = listLicenciaturaDTO.get(reg);
+																		
+																	}
+									%>
+									
 
 								
-									<label> <span>Periodo :</span>
+										<label> <span>Fecha inicio:</span>
 									</label>
 									<tr class="color">
 
 
-										<input type="text" name="proyecto" placeholder="Periodo">
+										<input type="text" name="FechaI" placeholder="Fecha inicio" value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null ? ((RegistroPublicacionesDTO) request
+												.getSession().getAttribute("updateEmpleadoDTO")).getFechaI()
+												: "");%> >
+										
+										<label> <span>Fecha fin:</span>
+									</label>
+													<input type="text" name="FechaF" placeholder="Fecha fin" value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null ? ((RegistroPublicacionesDTO) request
+												.getSession().getAttribute("updateEmpleadoDTO")).getFechaF()
+												: "");%> >			
+												
+										<label> <span>Nombre:</span>
+									</label>
+												
+												
+												<input type="text" name="Nombre" placeholder="Nombre" onkeypress="return  soloLetras(event)" value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null ? ((RegistroPublicacionesDTO) request
+												.getSession().getAttribute("updateEmpleadoDTO")).getNombre()
+												: "");%> >
+										
+										<label> <span>Institución:</span>
+									</label>
+													<input type="text" name="Institucion" placeholder="Institución" onkeypress="return  soloLetras(event)" value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null ? ((RegistroPublicacionesDTO) request
+												.getSession().getAttribute("updateEmpleadoDTO")).getInstitucion()
+												: "");%> >		
+																							
+										
+										<label> <span>Constancia:</span>
+									</label>
+													<input type="text" name="Constancia" placeholder="Constancia" value=<%out.println(request.getSession().getAttribute("updateEmpleadoDTO") != null ? ((RegistroPublicacionesDTO) request
+												.getSession().getAttribute("updateEmpleadoDTO")).getConstancia()
+												: "");%> >		
 									</tr>
 
-
-										<label> <span>Publicaci&oacute;n :</span>
-											<tr class="color">
-												<input id="name" type="text" name="name" placeholder="Publicación" />
-											<tr></label>
-
-										<label> <span>Institucio&oacute;n :</span>
-
-											<tr class="color">
-												<input id="email" type="text" name="email"
-													placeholder="Institución" />
-											<tr></label>
-
-										
+	<br></br>
+										 <input type="submit" value="Guardar" class="btn">
+		<input type="button" value="Cancelar" class="btn" onclick=" location.href='RegistroCurricular.jsp'">
 								</form>
 								
-								<br></br> <input type="submit" value="Guardar" class="btn">
-									<input type="button" value="Cancelar" class="btn"
-									onclick=" location.href='RegistroCurricular.jsp'">
-
-								<br></br>
+											<br></br>
 
 								<div class="CSSTableGenerator">
-									<table>
-										<tr>
-
-											<td>Periodo</td>
-											<td>Publicaci&oacuten</td>
-											<td>Instituci&oacuten</td>
-											<td>Actualizar</td>
-											<td>Eliminar</td>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-
-									</table>
-								</div>
-
-							</div>
-						</div>
-
-						<div style="clear: both;">&nbsp;</div>
-					</div>
-					<!-- end #content -->
-					<div id="sidebar">
-						<ul>
+									
 						
-							<li>
-								<h2>Aliquam tempus</h2>
-								<p>Mauris vitae nisl nec metus placerat perdiet est.
-									Phasellus dapibus semper consectetuer hendrerit.</p>
-							</li>
-							<li>
-								<h2>Categories</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Blogroll</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Archives</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!-- end #sidebar -->
+					<%
+						//out.println("datos");
+							//List<RegistroUsuarioDTO> listUsuarioDTO = new ArrayList<RegistroUsuarioDTO>();
+						List<RegistroPublicacionesDTO> listEmpleadoDTO = new ArrayList<RegistroPublicacionesDTO>();
+						RegistroPublicacionesDTO empleadoRDTO = new RegistroPublicacionesDTO();
+						RegistroPublicacionesDAO empleadoRDAO = new RegistroPublicacionesDAO();
+						listEmpleadoDTO = empleadoRDAO.retrievePublicaciones(empleadoRDTO);
+							if (request.getSession().getAttribute("listaUsuario") != null) {
+						listEmpleadoDTO = (List<RegistroPublicacionesDTO>) request
+								.getSession().getAttribute("listaEmpleado");
+							} else {
+							}
+							out.println("<center>");
+							out.println("<div class=data >");
+						///	out.println("<table >");
+							out.println("<table  id='Pmoral' ><thead><tr><td>Fecha Inicio</td>  <td>Fecha fin</td> <td>Nombre</td> <td>Instituci&oacuten</td>  <td>Actualizar</td><td>Eliminar</td></thead><tbody>");
+							
+
+							
+
+							
+							
+							for (int reg = 0; reg < listEmpleadoDTO.size(); reg++) {
+						empleadoRDTO = listEmpleadoDTO.get(reg);
+
+						out.println("<tr>");
+
+						//out.println("<td>");
+						//out.println("<center>"+usuarioDTO.getId()+"</center>");
+						//out.println("</td>");
+					//	empleadoRDTO.getIdComision();
+
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFechaI() + "</center>");
+						out.println("</th>");
+						
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFechaF() + "</center>");
+						out.println("</th>");
+						
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getNombre() + "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getInstitucion()
+								+ "</center>");
+						out.println("</th>");
+
+						
+						
+						/* out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getConstancia()+ "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFechaActual()
+								+ "</center>");
+						out.println("</th>");
+
+						
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getIdUsuarioCambio()+ "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getEstatus()
+								+ "</center>");
+						out.println("</th>");
+
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getAsignarDocente_IdAsignar()
+								+ "</center>");
+						out.println("</th>"); */
+
+					
+						out.println("<th>");
+						out.println("<center><a href=RegistroPublicaciones?opc=2&id="
+								+ empleadoRDTO.getIdPublicacion()
+								+ "  class=btn btn-skin pull-right role=button id=ac  onClick=muestra('Pfisica').innerHTML>Actualizar<a/> </center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center><a href=RegistroPublicaciones?opc=3&id="
+								+  empleadoRDTO.getIdPublicacion()
+								+ " class=btn btn-skin pull-right role=button  >Eliminar<a/>");
+						out.println("</th></center>");
+
+						out.println("</tr>");
+						
+
+							}
+							out.println("</tbody></table> </div>");
+							out.println("</center>");
+					%>
+
+
+									
+								</div>
 					<div style="clear: both;">&nbsp;</div>
 				</div>
 			</div>
