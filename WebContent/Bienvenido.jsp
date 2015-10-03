@@ -12,9 +12,10 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Principal</title>
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+
 <script type="text/javascript" src="js/CamposVacios.js"></script>
 </head>
-<body>
+<body> 
 
 	<div id="header">
 		<div id="logo">
@@ -23,9 +24,9 @@
 		</div>
 	</div>
 	<!-- end #header -->
-	<div id="menu">
+	<div id="navegador">
 		<ul>
-			<li class="current_page_item"><a href="#">Principal</a></li>
+		
 			<%
 
  				Integer res= (Integer)session.getAttribute("idRol");
@@ -34,9 +35,9 @@
                res = res==null?new Integer(0):res;
               
                if(res==4){
-            	   out.print("<li><a href=RegistroL.jsp>Registrar licenciatura</a></li>");
-            	   out.print("<li><a href=RegistroCS.jsp>Registrar empleado</a></li>");
-            	   out.print("<li><a href=Logout.jsp>Salir</a></li>");
+            	%>
+            	<jsp:include page="MenuSuper.jsp"></jsp:include>
+            	<% 
             	   
                    }
                if(res==1){
@@ -44,13 +45,17 @@
             	   out.print("<li><a href=Logout.jsp>Salir</a></li>");
                    }
                if(res==2){
-            	   out.print("<li><a href=RegistroD.jsp>Registrar docente</a></li>");
-            	   out.print("<li><a href=AsociarDocente.jsp>Asignar licenciatura</a></li>");
-            	   out.print("<li><a href=Logout.jsp>Salir</a></li>");
+            	   %>
+            	   <jsp:include page="MenuSecretaria.jsp"></jsp:include>
+            	  
+            	   <% 
                  }
               if(res==3){
-             	 out.print("<li><a href=DatosPersonales.jsp>Registrar información curricular</a></li>");
-             	  out.print("<li><a href=Logout.jsp>Salir</a></li>");
+            	  %>
+           	   <jsp:include page="MenuDocente.jsp"></jsp:include>
+           	  
+           	   <%
+             
        
                }
                  
@@ -77,21 +82,21 @@
  				
                res = res==null?new Integer(0):res;
               
-               if(res==1){
-            	   out.print("<p>El perfil de usuario que tienes es <strong>Super usuario</strong> los privilegios en este sistema son:"+
-            		   "<ul><li>Registrar licenciaturas.</li><li>Registrar coordinadores de licenciatura.</li><li>Registrar secretarias.</li></ul></p>");
-   				
+               if(res==4){
+            	   %>
+            	   <jsp:include page="Super.jsp"></jsp:include>
+            	   <%
                    }
-               if(res==2){
+               if(res==1){
             	   
             	   out.print("<p>El perfil de usuario que tienes es <strong>Coordinador</strong> los privilegios en este sistema son:"+
                 		   "<ul><li>Generar y descargar los curriculums de todos los docentes en un archivo pdf.</li><li>Generar y descargar un empaquetado con extension .zip de cada uno de los curriculums de los docentes.</li></ul></p>");
                }
-               if(res==3){
+               if(res==2){
             	   out.print("<p>El perfil de usuario que tienes es <strong>Secretaria</strong> los privilegios en este sistema son:"+
                 		   "<ul><li>Registrar docentes.</li><li>Modificar información curricular de los docentes.</li><li>Generar y descargar el curriculum en formato pdf de un docente en particular</li><li>Asignar un docente a la licenciatura</li></ul></p>");
             	 }
-              if(res==4){
+              if(res==3){
             	  
             	  out.print("<p>El perfil de usuario que tienes es <strong>Docente</strong> los privilegios en este sistema son:"+
                		   "<ul><li>Administrar tu información curricular.</li><li>Generar y descargar tu curriculum en formato pdf.</li></ul></p>");

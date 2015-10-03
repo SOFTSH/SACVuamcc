@@ -22,8 +22,7 @@ h1 {
 #navegador li {
 	margin: 0px 5px;
 	padding: 0.1em 1em 0.5em 1em;
-	background-color: #991821;
-	width: 12%;
+	
 	float: left;
 	list-style-type: none;
 	position: relative;
@@ -59,14 +58,3 @@ h1 {
 	clear: both;
 }
 
-#principal h2 {
-	font: bold 1.5em arial;
-	padding: 0.5em
-}
-
-#principal p {
-	font: normal 0.9em arial;
-	text-align: justify;
-	text-indent: 3em;
-	padding: 0.5em 2em;
-}
