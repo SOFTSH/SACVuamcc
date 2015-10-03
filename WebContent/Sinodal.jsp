@@ -1,205 +1,256 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"
+	import="java.util.*,mx.uatx.curriculums.dto.SinodalDTO,mx.uatx.curriculums.dao.SinodalDAO"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Sinodal</title>
+<title>Sinodales</title>
+
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
-</head>
+		<!-- Libreria jQuery -->
+	 <script type="text/javascript" src="js/validarCampos.js"></script>
+        <script type="text/javascript">
+
+  function validarCS(){
+	if(document.registrocs.nombre.value==""){
+		location.href='Vaciosrcs.jsp';  
+		return false;
+	} 
+	if(document.registrocs.ap.value==""){
+		location.href='Vaciosrcs.jsp';  
+		return false;
+	} 
+	if(document.registrocs.am.value==""){
+		location.href='Vaciosrcs.jsp';  
+		return false;
+	} 
+	if(document.registrocs.noe.value==""){
+		location.href='Vaciosrcs.jsp';  
+		return false;
+	} 
+	if(document.registrocs.correo.value==""){
+		location.href='Vaciosrcs.jsp';  
+		return false;
+	} 
+	
+	document.registrocs.submit();
+  }
+</script> 
+	</head>
+
+
 <body>
-	<div id="wrapper">
-		<div id="header">
-			<div id="logo">
-				<h1>
-					<a href="">Sistema de Administración de CV´s </a>
-				</h1>
-				<p>
-					<a href="http://templated.co" rel="nofollow">UAMCC</a>
-				</p>
-			</div>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<h1><a href="">Sistema de Aministración de CV´s </a></h1>
+			<p><a href="http://templated.co" rel="nofollow">UAMCC</a></p>
 		</div>
-		<!-- end #header -->
+	</div>
+	<!-- end #header -->
+	<div id="menu">
+		
 		<div id="menu">
-			<ul>
-					<li class="current_page_item"><a href="Bienvenido.jsp">Pricinpal</a></li>
-				<li><a href="DatosPersonales.jsp">Datos Personales</a></li>
-				<li><a href="ExperienciaFormacion.jsp">Experiencia y
-						Formación</a></li>
-				<li><a href="ExperienciaLaboral.jsp">Experiencia Laboral</a></li>
-				<li><a href="Comisiones.jsp">Comisiones</a></li>
-				<li><a href="Publicaciones.jsp">Publicaciones</a></li>
-				<li><a href="MiembroOrganizacion.jsp">Miembro de
-						Organización</a></li>
-				<li><a href=AsesoriaTesis.jsp>Asesoría de Tesis</a></li>
-				<li><a href=Sinodal.jsp>Sinodal</a></li>
+		<ul>
+		
+			<li ><a href="Bienvenido.jsp">Principal</a></li>
+		
+			
+			<li><a href="#">Salir</a></li>
+		</ul>
+	
+	</div>
+	</div>
+	<!-- end #menu -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
 
+<div class="target">
 
-
-			</ul>
-		</div>
-		<!-- end #menu -->
-		<div id="page">
-			<div id="page-bgtop">
-				<div id="page-bgbtm">
-					<div id="content">
-						<div class="post">
-							<h2 class="title">
-								<a href="#">SINODAL</a>
-							</h2>
-							<p class="meta">
-								<span class="date"> </span><span class="posted"> <a
-									href="#"></a></span>
-							</p>
-							<div style="clear: both;">&nbsp;</div>
-							<div class="entry">
-								<form action="" method="post" class="basic-grey">
-
-
-									<label> <span>Proyecto :</span>
-									</label>
-									<tr class="color">
-
-
-										<input type="text" name="proyecto" placeholder="Proyecto">
-									</tr>
-
-
+						<form name="sinodal" action="Sinodal" method="get" class="basic-grey" >
+							<input type="hidden" name="opc" value="1" />
+							<h1>
+								Sinodales <span>Porfavor llene
+									todos los Campos</span>
+							</h1>
+							
+									<%
+										List<SinodalDTO> SinodalDTO = new ArrayList<SinodalDTO>();
+									SinodalDTO empleadoDTO = new SinodalDTO();
+									SinodalDAO empleadoDAO = new SinodalDAO();
+									SinodalDTO = empleadoDAO.retrieveSinodal(empleadoDTO);
+																	request.getSession().getAttribute("listaSinodal");
+																	session.setAttribute("listaSinodal", SinodalDTO);
+																	for (int reg = 0; reg < SinodalDTO.size(); reg++) {
+																		empleadoDTO = SinodalDTO.get(reg);
+																		
+																	}
+									%>
+							
+														
+							
+							<label> <span>Nombre Proyecto :</span>
+								<tr class="color">
+									<input onkeypress="return soloLetras(event)" id="NombreProyecto" type="text" name="NombreProyecto" placeholder="NombreProyecto"
+										value=<%out.println(request.getSession().getAttribute("updateSinodalDTO") != null ? ((SinodalDTO) request
+												.getSession().getAttribute("updateSinodalDTO")).getNombreProyecto()
+												: "");%> >
+										</tr></label>		
+										
+											
+							 <label> <span>Nivel:</span>
+								<tr class="color">
+									<input onkeypress="return soloLetras(event)" id="Nivel" type="text" name="Nivel"
+										placeholder="Nivel" 
+										value=<%out.println(request.getSession().getAttribute("updateSinodalDTO") != null ? ((SinodalDTO) request
+												.getSession().getAttribute("updateSinodalDTO")).getNivel()
+												: "");%>>
+								</tr></label>
+						
+								 <label> <span>Fecha Titulacion:</span>
+								<tr class="color">
+									<input  id="FechaTitulacion" type="date" name="FechaTitulacion"
+										placeholder="FechaTitulacion" 
+										value=<%out.println(request.getSession().getAttribute("updateSinodalDTO") != null ? ((SinodalDTO) request
+												.getSession().getAttribute("updateSinodalDTO")).getFechaTitulacion()
+												: "");%>>
+								</tr></label>
+								
+								<tr></label> 
+								
+								 <label> <span>Alumnos:</span>
+								<tr class="color">
+									<input onkeypress="return soloLetras(event)" id="Alumnos" type="text" name="Alumnos"
+										placeholder="Alumnos" 
+										value=<%out.println(request.getSession().getAttribute("updateSinodalDTO") != null ? ((SinodalDTO) request
+												.getSession().getAttribute("updateSinodalDTO")).getAlumnos()
+												: "");%>>
+								</tr></label>
+								
+								 <label> <span>Constancia:</span>
+								<tr class="color">
+									<input onkeypress="return soloLetras(event)" id="Constancia" type="text" name="Constancia"
+										placeholder="Constancia" 
+										value=<%out.println(request.getSession().getAttribute("updateSinodalDTO") != null ? ((SinodalDTO) request
+												.getSession().getAttribute("updateSinodalDTO")).getConstancia()
+												: "");%>>
+								</tr></label>
+								
+								
+								
 									<label> <span>Opci&oacute;n de Titulaci&oacute;n
 											:</span>
 										<tr class="color"></label>
 									</td>
-									<td><select name="consepto">
+									<td><select name="opctitu">
 											<option Value="0">Seleccione una Opción</option>
-											<option name=lib value="Colegiatura">I. Tesis</option>
-											<option name=lib value="Libro">II. Titulación por
+											<option name=lib value="1">Tesis</option>
+											<option name=lib value="2">Titulación por
 												promedio</option>
-											<option name=lib value="Extra">III. Memoria</option>
-											<option name=lib value="Extra">IV. Prototipo</option>
-											<option name=lib value="Extra">V. Actualización
+											<option name=lib value="3">Memoria</option>
+											<option name=lib value="4">Prototipo</option>
+											<option name=lib value="5">Actualización
 												Curricular</option>
-											<option name=lib value="Extra">VI Examen General de
+											<option name=lib value="6">Examen General de
 												Conociientos</option>
 											<tr>
-									</select> <label> <span>Nivel :</span>
-
-											<tr class="color">
-												<input id="email" type="text" name="email"
-													placeholder="Nivel" />
-											<tr></label>
-											 <label> <span>Fecha de
-												Titulaci&oacute;n :</span>
-											<tr class="color">
-												<input id="name" type="text" name="name"
-													placeholder="Fecha de Titulación" />
-											<tr></label>
-											
-											
-											<label> <span>Alumno (os) :</span>
-									</label>
-									<tr class="color">
-
-
-										<input type="text" name="proyecto" placeholder="Alumno (os)">
-									</tr>
-								</form>
-
-								<br></br> <input type="submit" value="Guardar" class="btn">
-									<input type="button" value="Cancelar" class="btn"
-									onclick=" location.href='RegistroCurricular.jsp'">
-								<br></br>
-
-								<div class="CSSTableGenerator">
-									<table>
-										<tr>
-
-											<td>Proyecto</td>
-											<td>Opci&oacute;n de Titulaci&oacute;n</td>
-											<td>Nivel</td>
-											<td>Fecha de Titulaci&oacute;n</td>
-											<td>Alumno (os)</td>
-											<td>Actualizar</td>
-											<td>Eliminar</td>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-										<tr>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<th>datos</th>
-											<u><th>Editar</th></u>
-											<u><th>Eliminar</th></u>
-										</tr>
-
-									</table>
-								</div>
-
-							</div>
+									</select> 
+								
+								<tr></label> <span>&nbsp;</span> <input type="submit"
+								class="button" value="Guardar" /> 
+						</form>
 						</div>
+<br><br>	
+	</div>
+			<br><br>	
+				<br><br>
+					
+					<div class="CSSTableGenerator">
+						
+					<%
+					
+						List<SinodalDTO> listEmpleadoDTO = new ArrayList<SinodalDTO>();
+						SinodalDTO empleadoRDTO = new SinodalDTO();
+						SinodalDAO empleadoRDAO = new SinodalDAO();
+						listEmpleadoDTO = empleadoRDAO.retrieveSinodal(empleadoRDTO);
+							if (request.getSession().getAttribute("listaUsuario") != null) {
+						listEmpleadoDTO = (List<SinodalDTO>) request
+								.getSession().getAttribute("listaEmpleado");
+							} else {
+							}
+							out.println("<center>");
+							out.println("<div class=data >");
+							out.println("<table  id='Pmoral' ><thead><tr><td>Nombre Proyecto</td><td>Opcion Titulacion</td><td>Nivel</td><td>Fecha Titulacion</td><td>Alumno (s)</td></td><td>Actualizar</td><td>Eliminar</td></thead><tbody>");
+							for (int reg = 0; reg < listEmpleadoDTO.size(); reg++) {
+						empleadoRDTO = listEmpleadoDTO.get(reg);
 
-						<div style="clear: both;">&nbsp;</div>
-					</div>
-					<!-- end #content -->
-					<div id="sidebar">
-						<ul>
-							
-							<li>
-								<h2>Aliquam tempus</h2>
-								<p>Mauris vitae nisl nec metus placerat perdiet est.
-									Phasellus dapibus semper consectetuer hendrerit.</p>
-							</li>
-							<li>
-								<h2>Categories</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Blogroll</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Archives</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<!-- end #sidebar -->
+						out.println("<tr>");
+
+						empleadoRDTO.getIdSinodal();
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getNombreProyecto() + "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getDescripcionTitu()
+								+ "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getNivel()
+								+ "</center>");
+						out.println("</th>");
+
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getFechaTitulacion() + "</center>");
+						out.println("</th>");
+
+						
+						out.println("<th>");
+						out.println("<center>" + empleadoRDTO.getAlumnos() + "</center>");
+						out.println("</th>");
+						
+						out.println("<th>");
+						out.println("<center><a href=Sinodal?opc=2&id="
+								+ empleadoRDTO.getIdSinodal()
+								+ "  class=btn btn-skin pull-right role=button id=ac  onClick=muestra('Pfisica').innerHTML>Actualizar<a/> </center>");
+						out.println("</th>");
+						out.println("<th>");
+						out.println("<center><a href=Sinodal?opc=3&id="
+								+  empleadoRDTO.getIdSinodal()
+								+ " class=btn btn-skin pull-right role=button  >Eliminar<a/>");
+						out.println("</th></center>");
+
+						out.println("</tr>");
+
+							}
+							out.println("</tbody></table> </div>");
+							out.println("</center>");
+					%>
+</div>
+
+			</div>
+
 					<div style="clear: both;">&nbsp;</div>
 				</div>
+				<!-- end #content -->
+				<div id="sidebar"></div>
+				<!-- end #sidebar -->
+				<div style="clear: both;">&nbsp;</div>
 			</div>
 		</div>
-		<!-- end #page -->
+	</div>
+
+
+
+	<!-- end #page -->
 	</div>
 	<div id="footer">
 		<p>
